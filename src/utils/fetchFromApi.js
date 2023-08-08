@@ -5,6 +5,7 @@ const baseUrl = "https://youtube-v31.p.rapidapi.com";
 const options = {
   params: {
     maxResults: "50",
+    regionCode: 'IN',
   },
   headers: {
     "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
