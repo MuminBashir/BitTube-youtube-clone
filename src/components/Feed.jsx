@@ -3,16 +3,8 @@ import { Box, Stack, Typography } from "@mui/material";
 
 import { Sidebar, Videos } from "./";
 
-// import { fetchFromApi } from "../utils/fetchFromApi";
-
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New");
-
-  // useEffect(() => {
-  //   fetchFromApi(`search?part=snippet&q=${selectedCategory}`).then((data) =>
-  //     setVideos(data.items)
-  //   );
-  // }, [selectedCategory]);
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>

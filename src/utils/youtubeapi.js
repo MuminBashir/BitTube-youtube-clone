@@ -14,13 +14,45 @@ export const youtubeApi = createApi({
     getVideos: builder.query({
       query: (selectedCategory) => {
         return {
-          url: `/search?part=snippet&q=${selectedCategory}`,
+          url: `/search`,
           headers: youtubeApiHeaders,
-          params: { maxResults: "50", regionCode: "IN" },
+          params: {
+            maxResults: "50",
+            regionCode: "IN",
+            part: "snippet",
+            q: selectedCategory,
+          },
+        };
+      },
+    }),
+    getChannel: builder.query({
+      query: (id) => {
+        return {
+          url: `/channels`,
+          headers: youtubeApiHeaders,
+          params: { part: "snippet", id },
+        };
+      },
+    }),
+    getChannelVideos: builder.query({
+      query: (id) => {
+        return {
+          url: `/search`,
+          headers: youtubeApiHeaders,
+          params: {
+            maxResults: "50",
+            part: "snippet,id",
+            channelId: id,
+            order: "date",
+          },
         };
       },
     }),
   }),
 });
 
-export const { useGetVideosQuery } = youtubeApi;
+export const {
+  useGetVideosQuery,
+  useGetChannelQuery,
+  useGetChannelVideosQuery,
+} = youtubeApi;
