@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import millify from "millify";
+import moment from "moment";
 import { Stack, Typography, Box } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 
@@ -28,7 +29,7 @@ const VideoDetail = () => {
   }
 
   const {
-    snippet: { title, channelId, channelTitle },
+    snippet: { title, channelId, channelTitle, publishedAt },
     statistics: { viewCount, likeCount },
   } = video?.items?.[0];
 
@@ -72,6 +73,14 @@ const VideoDetail = () => {
                 </Typography>
               </Stack>
             </Stack>
+            <Typography
+              color="#fff"
+              px={2}
+              variant="body2"
+              sx={{ opacity: 0.7 }}
+            >
+              {moment(publishedAt).startOf("ss").fromNow()}
+            </Typography>
           </Box>
         </Box>
         <Stack

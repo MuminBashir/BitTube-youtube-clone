@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { Sidebar, Videos } from "./";
 
@@ -10,7 +11,7 @@ const Feed = () => {
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
         sx={{
-          height: { sx: "auto", md: "94vh" },
+          height: { sx: "auto", md: "93vh" },
           borderRight: "1px solid #3d3d3d",
           px: { sx: 0, md: 2 },
         }}
@@ -23,10 +24,22 @@ const Feed = () => {
         <Typography
           className="copyright"
           variant="body2"
-          sx={{ mt: 1.5, color: "#fff" }}
+          sx={{ my: 1.5, color: "#fff" }}
         >
-          &copy; Copyright 2023 | BitTube
-          <br /> Developed by Mumin Bashir
+          BitTube | &copy; All rights reserved
+          <br />
+          Developed by
+          <FavoriteIcon
+            fontSize="small"
+            sx={{ color: "#F31503", position: "relative", top: "3px", mx: 0.5 }}
+          />
+          <a
+            href="https://github.com/MuminBashir"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mumin Bashir
+          </a>
         </Typography>
       </Box>
 
