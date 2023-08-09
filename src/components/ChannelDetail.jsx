@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
-import { Videos, ChannelCard } from "./";
+import { Videos, ChannelCard, Loading } from "./";
 
 import { useGetChannelDetailsQuery } from "../utils/youtubeapi";
 
@@ -24,7 +24,7 @@ const ChannelDetail = () => {
           fontSize: "2rem",
         }}
       >
-        Loading...
+        <Loading />
       </Box>
     );
   }
@@ -45,7 +45,7 @@ const ChannelDetail = () => {
         />
       </Box>
       <Box display="flex" p={2}>
-        <Box sx={{ mr: { sm: "100px" } }} />
+        <Box sx={{ mr: { md: "100px" } }} />
         <Videos channelId={id} />
       </Box>
     </Box>

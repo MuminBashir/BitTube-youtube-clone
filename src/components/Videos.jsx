@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack, Box } from "@mui/material";
-import { VideoCard, ChannelCard } from "./";
+import { VideoCard, ChannelCard, Loading } from "./";
 
 import {
   useGetSearchVideosQuery,
@@ -19,9 +19,9 @@ const Videos = ({ selectedCategory, channelId, videoId, direction }) => {
   if (isFetching || isFetching2 || isFetching3) {
     return (
       <Box
-        style={{
+        sx={{
           width: "100%",
-          height: "80%",
+          height: { xs: "80vh", sm: "80vh", md: "80%" },
           display: "Flex",
           justifyContent: "center",
           alignItems: "center",
@@ -29,7 +29,7 @@ const Videos = ({ selectedCategory, channelId, videoId, direction }) => {
           fontSize: "2rem",
         }}
       >
-        Loading...
+        <Loading />
       </Box>
     );
   }

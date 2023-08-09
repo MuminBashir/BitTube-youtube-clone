@@ -5,7 +5,7 @@ import millify from "millify";
 import { Stack, Typography, Box } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 
-import { Videos } from "./";
+import { Videos, Loading } from "./";
 import { useGetVideoDetailsQuery } from "../utils/youtubeapi";
 
 const VideoDetail = () => {
@@ -22,7 +22,7 @@ const VideoDetail = () => {
         justifyContent="center"
         alignItems="center"
       >
-        Loading...
+        <Loading />
       </Box>
     );
   }
@@ -36,7 +36,7 @@ const VideoDetail = () => {
     <Box minHeight="95vh">
       <Stack direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
-          <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
+          <Box sx={{ width: "100%", mt: 2 }}>
             <ReactPlayer
               url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
@@ -79,11 +79,35 @@ const VideoDetail = () => {
           py={{ md: 1, xs: 5 }}
           justifyContent="center"
           alignItems="center"
+          sx={{
+            borderLeft: "1px solid #3d3d3d",
+            borderBottom: "1px solid #3d3d3d",
+            height: { md: "95vh", sm: "auto" },
+            px: { sx: 0, md: 2 },
+          }}
         >
-          <Typography variant="h5" mb={2} px={3} py={1} color="#fff" sx={{backgroundColor: "darkred", borderRadius: "20px"}}>
+          <Typography
+            variant="h5"
+            mb={{ xs: 3, sm: 3, md: 1 }}
+            px={3}
+            py={1}
+            color="#fff"
+            sx={{
+              backgroundColor: "darkred",
+              borderRadius: "20px",
+            }}
+          >
             Related Videos
           </Typography>
-          <Videos direction="column" videoId={id} />
+          <Stack
+            sx={{
+              overflowY: "auto",
+              height: { sx: "auto", md: "92%" },
+              flexDirection: { md: "column" },
+            }}
+          >
+            <Videos direction="column" videoId={id} />
+          </Stack>
         </Stack>
       </Stack>
     </Box>
