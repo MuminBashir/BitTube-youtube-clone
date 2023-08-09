@@ -3,18 +3,20 @@ import { Stack, Box } from "@mui/material";
 import { VideoCard, ChannelCard } from "./";
 
 import {
-  useGetVideosQuery,
+  useGetSearchVideosQuery,
   useGetChannelVideosQuery,
+  useGetRelatedVideosQuery,
 } from "../utils/youtubeapi";
 
-const Videos = ({ selectedCategory, id }) => {
-  const { data: videos, isFetching } = useGetVideosQuery(selectedCategory);
+const Videos = ({ selectedCategory, channelId, videoId, direction }) => {
+  const { data: videos, isFetching } =
+    useGetSearchVideosQuery(selectedCategory);
   const { data: videos2, isFetching: isFetching2 } =
-    useGetChannelVideosQuery(id);
+    useGetChannelVideosQuery(channelId);
+  const { data: videos3, isFetching: isFetching3 } =
+    useGetRelatedVideosQuery(videoId);
 
-  console.log(videos);
-
-  if (isFetching || isFetching2) {
+  if (isFetching || isFetching2 || isFetching3) {
     return (
       <Box
         style={{
@@ -31,8 +33,14 @@ const Videos = ({ selectedCategory, id }) => {
       </Box>
     );
   }
+
   return (
-    <Stack direction="row" flexWrap="wrap" justifyContent="start" gap={3}>
+    <Stack
+      direction={direction || "row"}
+      flexWrap="wrap"
+      justifyContent="start"
+      gap={3}
+    >
       {selectedCategory &&
         videos?.items?.map((item, i) => (
           <Box key={i}>
@@ -40,8 +48,15 @@ const Videos = ({ selectedCategory, id }) => {
             {item.id.channelId && <ChannelCard channelDetails={item} />}
           </Box>
         ))}
-      {id &&
+      {channelId &&
         videos2?.items?.map((item, i) => (
+          <Box key={i}>
+            {item.id.videoId && <VideoCard video={item} />}
+            {item.id.channelId && <ChannelCard channelDetails={item} />}
+          </Box>
+        ))}
+      {videoId &&
+        videos3?.items?.map((item, i) => (
           <Box key={i}>
             {item.id.videoId && <VideoCard video={item} />}
             {item.id.channelId && <ChannelCard channelDetails={item} />}

@@ -11,7 +11,7 @@ export const youtubeApi = createApi({
   reducerPath: "youtubeApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getVideos: builder.query({
+    getSearchVideos: builder.query({
       query: (selectedCategory) => {
         return {
           url: `/search`,
@@ -25,12 +25,12 @@ export const youtubeApi = createApi({
         };
       },
     }),
-    getChannel: builder.query({
+    getChannelDetails: builder.query({
       query: (id) => {
         return {
           url: `/channels`,
           headers: youtubeApiHeaders,
-          params: { part: "snippet", id },
+          params: { part: "snippet,statistics", id },
         };
       },
     }),
@@ -48,11 +48,40 @@ export const youtubeApi = createApi({
         };
       },
     }),
+    getVideoDetails: builder.query({
+      query: (id) => {
+        return {
+          url: `/videos`,
+          headers: youtubeApiHeaders,
+          params: {
+            maxResults: "50",
+            part: "snippet,statistics",
+            id,
+          },
+        };
+      },
+    }),
+    getRelatedVideos: builder.query({
+      query: (id) => {
+        return {
+          url: `/search`,
+          headers: youtubeApiHeaders,
+          params: {
+            maxResults: "20",
+            part: "id,snippet",
+            relatedToVideoid: id,
+            type: "video",
+          },
+        };
+      },
+    }),
   }),
 });
 
 export const {
-  useGetVideosQuery,
-  useGetChannelQuery,
+  useGetSearchVideosQuery,
+  useGetChannelDetailsQuery,
   useGetChannelVideosQuery,
+  useGetVideoDetailsQuery,
+  useGetRelatedVideosQuery,
 } = youtubeApi;

@@ -4,12 +4,12 @@ import { Box } from "@mui/material";
 
 import { Videos, ChannelCard } from "./";
 
-import { useGetChannelQuery } from "../utils/youtubeapi";
+import { useGetChannelDetailsQuery } from "../utils/youtubeapi";
 
 const ChannelDetail = () => {
   const { id } = useParams();
 
-  const { data: channelDetail, isFetching } = useGetChannelQuery(id);
+  const { data: channelDetail, isFetching } = useGetChannelDetailsQuery(id);
 
   if (isFetching) {
     return (
@@ -46,7 +46,7 @@ const ChannelDetail = () => {
       </Box>
       <Box display="flex" p={2}>
         <Box sx={{ mr: { sm: "100px" } }} />
-        <Videos id={id} />
+        <Videos channelId={id} />
       </Box>
     </Box>
   );
